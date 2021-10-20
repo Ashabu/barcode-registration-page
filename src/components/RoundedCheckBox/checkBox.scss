@@ -1,0 +1,53 @@
+.container {
+    width: 100%;
+
+    .round {
+        position: relative;
+
+        span {
+        color: white;
+        position: absolute;
+        left: 40px;
+        top: 3px;
+        }
+
+        label {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            height: 28px;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 28px;
+
+            &::after {
+                border: 2px solid #fff;
+                border-top: none;
+                border-right: none;
+                content: "";
+                height: 6px;
+                left: 7px;
+                opacity: 0;
+                position: absolute;
+                top: 8px;
+                transform: rotate(-45deg);
+                width: 12px;
+            }
+        }
+
+          input[type="checkbox"] {
+            visibility: hidden;
+
+            &:checked + label {
+                background-color: #1A1A1A;
+                border-color: #cfcfcf;
+
+                &:after {
+                    opacity: 1;
+                  }
+              }
+          }
+  } 
+}
