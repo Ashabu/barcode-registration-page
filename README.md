@@ -1,1 +1,1 @@
-# barcode-registration-page
+# Registration Page for City Mall birthday event
