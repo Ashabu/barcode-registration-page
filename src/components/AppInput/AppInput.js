@@ -2,25 +2,27 @@ import React, {useEffect, useState} from 'react';
 import './appInput.scss';
 
 const AppInput = (props) => {
-    const {htmlFor, labelText, value, onChange, type} = props;
+    const {htmlFor, labeltext, errortext } = props;
 
     const [isActive, setIsActive] = useState(false);
+
+    console.log(props.placeholder)
     
     useEffect(() => {
-        if(value == '') {
+        if(props.value == '') {
             setIsActive(false);
         } else {
             setIsActive(true);
         }
-    }, [value])
+    }, [props.value])
 
     return (
         <div id="float-label">
-            <input type={type} value = {value} onChange = {onChange} />
-
-            <label className={ isActive ? "Active" : ""} htmlFor={htmlFor}>
-                {labelText}
+            <input  {...props} />
+            <label className={ isActive  || props.type == 'date'? "Active" : ""} htmlFor={htmlFor}>
+                {labeltext}
             </label>
+           {errortext? <span>{errortext}</span> : null}
         </div>
     );
 };

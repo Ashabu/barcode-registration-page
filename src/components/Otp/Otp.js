@@ -45,7 +45,7 @@ const Otp = (props) => {
     return (
         <div className='otp-container'>
             <div className='otp-cont-top'>
-                <p>ოტეპეს ჰიდერის ტექსტი</p>
+                <p>გთხოვთ შეიყვანოთ მობილურ ნომერზე მიღებული ერთჯერადი კოდი</p>
             </div>
             <div className='otp-cont-body'>
             {otp.map((element, index) => (
