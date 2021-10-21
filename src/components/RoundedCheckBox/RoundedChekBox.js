@@ -3,14 +3,17 @@ import './checkBox.scss';
 
 const RoundedChekBox = (props) => {
 
-    const {checked, labeltext, onHandleCheck} = props;
+    const { checked, id, labeltext, onHandleCheck, hasLink } = props;
 
     return (
-        <div className="container" onClick = {onHandleCheck}>
-            <div className="round" onClick = {onHandleCheck}>
-            <span style = {{color: 'white'}}  >{labeltext}</span>
-                <input type="checkbox" checked = {checked} id="checkbox" />
-                <label htmlFor="checkbox"></label>
+        <div className="container" onClick={onHandleCheck}>
+            <div className="round" >
+                {hasLink ?
+                    <a style={{ position: 'absolute', left: 35, color: '#FFFFFF' }} href="https://google.com" target="_blank">{labeltext}</a>
+                    :
+                    <span style={{ color: 'white' }}  >{labeltext}</span>}
+                <input type="checkbox" checked={checked} id={id} onChange={onHandleCheck} />
+                <label htmlFor={id}></label>
             </div>
         </div>
     );

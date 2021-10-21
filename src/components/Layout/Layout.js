@@ -9,6 +9,7 @@ const Layout = (props) => {
             </div>
             <div className='layout-logo'>
                 <img src='../../assets/images/citymall-logo.png' alt='logo' />
+                
             </div>
             <div className = 'app-layout-body'>
             {props.children}
@@ -16,6 +17,7 @@ const Layout = (props) => {
             
             <div className='arrows up'>
                 <img src='../../assets/images/arrow-up.png' alt='img' />
+                <img  src = '../../assets/images/visa-logo_1.png' alt= 'visa-logo'/>
             </div>
         </div>
     );

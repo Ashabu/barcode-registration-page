@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import './otp.scss'
 
 const Otp = (props) => {
-    const { count, errorMessage } = props;
+    const { count, error, phoneNumber } = props;
 
     const [otp, setOtp] = useState(new Array(count).fill(''));
 
@@ -17,6 +18,17 @@ const Otp = (props) => {
         inputRef2,
         inputRef3
     ];
+
+
+    useEffect(() => {
+        if (phoneNumber) {
+            handleUserOtp(phoneNumber);
+            return;
+        };
+        
+    }, [phoneNumber]);
+
+    
 
     const handleFocusInput = (event, index) => {
         if (refs[index + 1] && event.key === 'ArrowRight') {
@@ -42,27 +54,38 @@ const Otp = (props) => {
         if (element.nextSibling && element.value !== '') element.nextSibling.focus();
     };
 
+    const handleUserOtp = (value) => {
+        axios.post(`https://citymallapi.payunicard.ge:8061/api/Otp/SendUserOtp`, { phone: value })
+            .then(res => {
+                console.log(res);
+            })
+            .catch(e => {
+                console.log(e)
+            });
+    }
+
+    console.log(otp)
     return (
         <div className='otp-container'>
             <div className='otp-cont-top'>
                 <p>გთხოვთ შეიყვანოთ მობილურ ნომერზე მიღებული ერთჯერადი კოდი</p>
             </div>
             <div className='otp-cont-body'>
-            {otp.map((element, index) => (
-                <input
-                    className='otp-input'
-                    key={index}
-                    ref={refs[index]}
-                    value={element}
-                    type='numeric'
-                    maxLength='1'
-                    onChange={e => handleOnChange(e.target, index)}
-                    onKeyDown={e => handleFocusInput(e, index)}
-                />))}
+                {otp.map((element, index) => (
+                    <input
+                        className='otp-input'
+                        key={index}
+                        ref={refs[index]}
+                        value={element}
+                        type='numeric'
+                        maxLength='1'
+                        onChange={e => handleOnChange(e.target, index)}
+                        onKeyDown={e => handleFocusInput(e, index)}
+                    />))}
             </div>
-            {errorMessage ? <p>{errorMessage}</p> : null}
+            {error ? <p style={{color: '#ff1212', textAlign: 'center'}}>{error}</p> : null}
             <div className='otp-cont-bottom'>
-                <button className='reg-button'>რეგისტრაცია</button>
+                <button className='reg-button' onClick = {() => props.callBack(otp.join(""))}>რეგისტრაცია</button>
             </div>
 
         </div>

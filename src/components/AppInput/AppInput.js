@@ -5,8 +5,6 @@ const AppInput = (props) => {
     const {htmlFor, labeltext, errortext } = props;
 
     const [isActive, setIsActive] = useState(false);
-
-    console.log(props.placeholder)
     
     useEffect(() => {
         if(props.value == '') {
