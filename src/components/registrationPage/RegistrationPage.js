@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import AppInput from '../AppInput/AppInput';
 import RoundedChekBox from '../RoundedCheckBox/RoundedChekBox';
 
@@ -14,13 +14,7 @@ const RegistrationPage = () => {
 
 
     return (
-        <div className='reg'>
-            <img className='down' src='../../assets/images/arrow-down.png' alt='img' />
-            <img className='up' src='../../assets/images/arrow-up.png' alt='img' />
-            <div className='reg-container'>
-                <div className='reg-top-cont'>
-                    <img src='../../assets/images/citymall-logo.png' alt='logo' />
-                </div>
+            <Fragment>
                 <div className='reg-input-cont'>
                     <p>რეგისტრაცია</p>
                     <AppInput
@@ -66,10 +60,7 @@ const RegistrationPage = () => {
                 <div className='reg-bottom-cont'>
                     <button className='reg-button'>რეგისტრაცია</button>
                 </div>
-
-            </div>
-
-        </div>
+            </Fragment>
     );
 };
 

@@ -1,80 +1,34 @@
 .App {
-    .reg {
-        position: relative;
+    .reg-button {
         width: 100%;
-        max-width: 428px;
-        min-height: 1000px;
-        height: 100%;
-        
-        background-color: #1A1A1A;
+        max-width: 325px;
+        height: 66px;
+        background-color: #636363;
+        outline: none;
+        color:#FFFFFF;
+        font-size: 14px;
+        border-radius: 50px;
+        border:none;
+        font-feature-settings: "case" on;
+        text-transform: uppercase;
+    }
+
+    .reg-input-cont {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         align-items: center;
-        padding: 0 44px;
-
-            .down {
-                position: absolute;
-                top: 0;
-                right: 0;
-            }
-
-            .up {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-            }
-
-        .reg-container {
-            width: 100%;
-            
-            
-            .reg-top-cont {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin: 50px 0;
-                p {
-                    text-align: center;
-                    color: #FFFFFF;
-                    font-feature-settings: "case" on;
-                    text-transform: uppercase;
-                }
-            }
-            
-            .reg-input-cont {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                p {
-                    color: #FFFFFF;
-                    font-feature-settings: "case" on;
-                    text-transform: uppercase;
-                }
-            }
-
-            .reg-bottom-cont {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                margin-top: 50px;
-                .reg-button {
-                    width: 100%;
-                    max-width: 325px;
-                    height: 66px;
-                    background-color: #636363;
-                    outline: none;
-                    color:#FFFFFF;
-                    font-size: 14px;
-                    border-radius: 50px;
-                    border:none;
-                    font-feature-settings: "case" on;
-                    text-transform: uppercase;
-                    
-
-                }
-            }
+        p {
+            color: #FFFFFF;
+            font-feature-settings: "case" on;
+            text-transform: uppercase;
         }
-
     }
+
+    .reg-bottom-cont {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+    
 }
