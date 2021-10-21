@@ -26,7 +26,7 @@ const RegisterPage = () => {
 
   const handleCostumerRegistration = (otp) => {
     let data = { ...regData, otp };
-    axios.post(`https://citymallapi.payunicard.ge:8061/api/Clients/AddVirtCard`, data)
+    axios.post(`https://cmapi.payunicard.ge:18011/api/Clients/AddVirtCard`, data)
       .then(res => {
         if (res.status === 200) {
           setDisplayText('თქვენ წარმატებით გაიარეთ რეგისტრაცია, ვირტუალური ბარათის ბმულს მიიღებთ SMS – ის სახით');
@@ -59,8 +59,8 @@ const RegisterPage = () => {
             step === 1 ?
               <Otp phoneNumber={regData?.phone} count={4} callBack={handleCostumerRegistration} error={otpErrorText} />
               :
-              <div style={{ width: '100%', color: '#FFFFF', textAlign: 'center' }}>
-                <p>
+              <div style={{ width: '100%', textAlign: 'center' }}>
+                <p style={{color: '#FFFFF'}}>
                   {displayText}
                 </p>
 
