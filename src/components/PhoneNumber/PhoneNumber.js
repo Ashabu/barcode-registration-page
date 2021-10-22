@@ -20,7 +20,6 @@ const PhoneNumber = (props) => {
     useEffect(() => {
         
         let tempNumber = `5${phoneNumber.join("")}`;
-        console.log(tempNumber.length)
         if(tempNumber.length == 9) {
             setErrorText('')
             props.callBack(tempNumber)

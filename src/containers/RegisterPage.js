@@ -22,7 +22,6 @@ const RegisterPage = () => {
   }, [regData])
 
   const handleRegData = (data) => {
-    console.log(data)
     setRegData({ ...data });
   }
 

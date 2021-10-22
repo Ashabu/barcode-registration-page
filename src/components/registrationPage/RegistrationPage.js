@@ -20,7 +20,7 @@ const errorTexts = [
 const RegistrationPage = (props) => {
     const [name, setName] = useState({ value: '', error: '' });
     const [surname, setSurname] = useState({ value: '', error: '' });
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState({ value: '5', error: '' });
     const [personalNumber, setPersonalNumber] = useState({ value: '', error: '' });
     const [email, setEmail] = useState({ value: '', error: '' });
     const [birthDate, setBirthDate] = useState();
@@ -49,12 +49,34 @@ const RegistrationPage = (props) => {
         };
     }, [personalNumber.value]);
 
+    useEffect(() => {
+        if(phoneNumber.value.length <= 1 || phoneNumber.value.length === 9) {
+            setPhoneNumber(prevState => {
+                return { ...prevState, error: '' };
+            });
+        } else {
+            setPhoneNumber(prevState => {
+                return { ...prevState, error: errorTexts[3] };
+            });
+        }
+    }, [phoneNumber.value])
 
 
 
+    // const handlePhoneNumber = (value) => {
+    //     console.log(value)
+    //     setPhoneNumber(value);
+    // };
     const handlePhoneNumber = (value) => {
-        console.log(value)
-        setPhoneNumber(value);
+        if (isNaN(value) || value.length < 1 || value.includes('.')) {
+            setPhoneNumber(prevState => {
+                return { ...prevState };
+            });
+        } else {
+            setPhoneNumber(prevState => {
+                return { ...prevState, value: value };
+            });
+        };
     };
 
     const handlePersonalNumber = (value) => {
@@ -130,7 +152,7 @@ const RegistrationPage = (props) => {
             birthDate: birthDate,
             firstName: name.value,
             lastname: surname.value,
-            phone: phoneNumber,
+            phone: phoneNumber.value,
             email: email.value,
             address: district,
             isApplyTerms: hasAgreedTerms.value,
@@ -139,7 +161,6 @@ const RegistrationPage = (props) => {
         props.callBack(regData);
     };
 
-    console.log(district)
     
 
 
@@ -159,7 +180,14 @@ const RegistrationPage = (props) => {
                     value={surname.value}
                     errortext={surname.error}
                     onChange={(e) => setSurname(prev => { return { ...prev, value: e.target.value.trim() } })} />
-                <PhoneNumber callBack={handlePhoneNumber} />
+                {/* <PhoneNumber callBack={handlePhoneNumber} /> */}
+                <AppInput
+                    type='numeric'
+                    labeltext='ტელეფონის ნომერი'
+                    value={phoneNumber.value}
+                    errortext={phoneNumber.error}
+                    maxLength={9}
+                    onChange={(e) => handlePhoneNumber(e.target.value)} />
                 <AppInput
                     type='numeric'
                     labeltext='პირადი ნომერი'
@@ -195,6 +223,7 @@ const RegistrationPage = (props) => {
                 <DatePicker callBack={handleBirthDate} />
                 <AppInput
                     type='text'
+                    
                     labeltext='საცხოვრებელი უბანი'
                     value={district}
                     onChange={(e) => setDistrict(e.target.value)} />
@@ -204,10 +233,10 @@ const RegistrationPage = (props) => {
                     hasLink
                     checked={hasAgreedTerms.value}
                     onHandleCheck={() => setHasAgreedTerms({ value: !hasAgreedTerms.value, error: '' })} />
-                {!hasAgreedTerms.error ? <span className='error-text'>{hasAgreedTerms.value}</span> : null}
+                {!hasAgreedTerms.error ? <span className='error-text'>{hasAgreedTerms.error}</span> : null}
             </div>
             <div className='reg-bottom-cont' >
-                <button className='reg-button' onClick={handleStep}>შემდეგ</button>
+                <button className='reg-button' onClick={handleStep}>შემდეგი</button>
             </div>
         </Fragment>
     );

@@ -64,7 +64,6 @@ const Otp = (props) => {
             });
     }
 
-    console.log(otp)
     return (
         <div className='otp-container'>
             <div className='otp-cont-top'>
