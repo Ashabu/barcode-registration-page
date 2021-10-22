@@ -55,7 +55,7 @@ const Otp = (props) => {
     };
 
     const handleUserOtp = (value) => {
-        axios.post(`https://citymallapi.payunicard.ge:8061/api/Otp/SendUserOtp`, { phone: value })
+        axios.post(`https://cmapi.payunicard.ge:18011/api/Otp/SendUserOtp`, { phone: value })
             .then(res => {
                 console.log(res);
             })

@@ -27,7 +27,7 @@ const RegisterPage = () => {
 
   const handleCostumerRegistration = (otp) => {
     let data = { ...regData, otp };
-    axios.post(`https://citymallapi.payunicard.ge:8061/api/Clients/AddVirtCard`, data)
+    axios.post(`https://cmapi.payunicard.ge:18011/api/Clients/AddVirtCard`, data)
       .then(res => {
         if (res.status === 200) {
           setDisplayText({ value: 'თქვენ წარმატებით გაიარეთ რეგისტრაცია, ვირტუალური ბარათის ბმულს მიიღებთ SMS – ის სახით', hasError: false });

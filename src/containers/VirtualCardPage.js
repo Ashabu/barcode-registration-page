@@ -22,7 +22,7 @@ const VirtualCardPage = () => {
       }, [barcodeValue])
 
       const getUserPoints = () => {
-        axios.get(`https://citymallapi.payunicard.ge:8061/api/Clients/GetAmount?Card=${barcodeValue}`)
+        axios.get(`https://cmapi.payunicard.ge:18011/api/Clients/GetAmount?Card=${barcodeValue}`)
         .then(res => {
           setUserPoints(res.data.data.amount)
         })
