@@ -3,6 +3,7 @@ import axios from 'axios';
 import Otp from '../components/Otp/Otp';
 import Layout from '../components/Layout/Layout';
 import RegistrationPage from '../components/registrationPage/RegistrationPage';
+import PhoneNumber from '../components/PhoneNumber/PhoneNumber';
 
 
 
@@ -68,6 +69,11 @@ const RegisterPage = () => {
 
               </div>
         }
+                    
+                      
+                    
+          
+        
         
       </Layout>
 

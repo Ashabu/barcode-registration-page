@@ -1,0 +1,47 @@
+.phone-number-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #FFFFFF;
+    margin-bottom: 20px;
+    .label-head {
+            font-family: "HMpangram-Light";
+            color: #cfcfcf !important;
+            font-size: 12px !important;
+        
+    }
+
+    .phone-number-cont-top {
+        text-align: center;
+        color: #F6F6F6;
+    }
+
+    .phone-number-cont-body {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 0 10px;
+       
+
+        span {
+            font-size: 20px;
+            color: #FFFFFF;
+        }
+
+        input {
+           
+            background-color:#1A1A1A;
+            color: #F6F6F6;
+            border: none;
+            width: 45px;
+            height: 54px;
+            outline: none;
+            font-size: 20px;
+            &.inp-1 {
+                width: 35px;
+            }
+
+                
+        }
+    }
+}
