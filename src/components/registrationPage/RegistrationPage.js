@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import AppInput from '../AppInput/AppInput';
+import DatePicker from '../DatePicker/DatePicker';
 import RoundedChekBox from '../RoundedCheckBox/RoundedChekBox';
+
 
 const errorTexts = [
     'არასწორი ელ-ფოსტის ფორმატი',
@@ -14,30 +16,64 @@ const errorTexts = [
 const RegistrationPage = (props) => {
     const [name, setName] = useState({ value: '', error: '' });
     const [surname, setSurname] = useState({ value: '', error: '' });
-    const [phoneNumber, setPhoneNumber] = useState({ value: '995', error: '' });
+    const [phoneNumber, setPhoneNumber] = useState({ value: '5', error: '' });
     const [personalNumber, setPersonalNumber] = useState({ value: '', error: '' });
     const [email, setEmail] = useState({ value: '', error: '' });
-    const [birthDate, setBirthDate] = useState('');
+    const [birthDate, setBirthDate] = useState({value: '', error: ''});
     const [district, setDistrict] = useState({ value: '', error: '' });
-    const [gender, setGender] = useState({male: false, female: false, other: false})
+    const [gender, setGender] = useState({ male: false, female: false, other: false})
     const [hasAgreedTerms, setHasAgreedTerms] = useState(false);
 
     useEffect(() => {
         if (email.value.length == 0) {
-            setEmail(prev => { return { ...prev, error: '' } })
+            setEmail(prev => { return { ...prev, error: '' } });
         } else {
             let regex = /\S+@\S+\.\S+/;
             if (regex.test(email.value)) {
-                setEmail(prev => { return { ...prev, error: '' } })
+                setEmail(prev => { return { ...prev, error: '' } });
             } else {
-                setEmail(prev => { return { ...prev, error: errorTexts[0] } })
-            }
-        }
-    }, [email.value])
+                setEmail(prev => { return { ...prev, error: errorTexts[0] } });
+            };
+        };
+    }, [email.value]);
+
+    useEffect(() => {
+        let tempNumber = phoneNumber.value.split("-");
+        console.log(tempNumber);
+        // tempNumber.map(e => {
+        //     let i = e;
+        //     if(i.length === 3) {
+        //         i = i + "-";
+        //         setPhoneNumber(prevState => {
+        //             return {
+        //                 ...prevState, 
+        //                 value: i
+        //             }
+        //         });
+        //     };
+           
+            
+        // })
+        // for(let i = 0; i<3; i++) {
+        //     setPhoneNumber(prevState => {
+        //         return {
+        //             ...prevState,
+        //             value: tempNumber[i] + "-"
+        //         }
+        //     })
+        
+
+        // if(rawPhoneNumber.length % 3 === 0) {
+        //     setPhoneNumber(prevState => {
+        //         return {...prevState, value: phoneNumber.value + "-"}
+        //     })
+        // }
+        
+    }, [phoneNumber.value])
 
 
     const handlePhoneNumber = (value) => {
-        if (isNaN(value) || value.length < 3 || value.includes('.')) {
+        if (value.length < 1 || value.includes('.')) {
             setPhoneNumber(prevState => {
                 return { ...prevState };
             });
@@ -60,34 +96,39 @@ const RegistrationPage = (props) => {
         };
     };
 
+    const handleBirthDate = (value) => {
+        console.log(value)
+        setBirthDate(value)
+    }
+
     const handleGender = (gender) => {
-        if(gender === 'MALE') {
-            setGender({male: true, female: false, other: false});
+        if (gender === 'MALE') {
+            setGender({ male: true, female: false, other: false });
         } else if (gender === 'FEMALE') {
-            setGender({male: false, female: true, other: false});
+            setGender({ male: false, female: true, other: false });
         } else {
-            setGender({male: false, female: false, other: true});
+            setGender({ male: false, female: false, other: true });
         }
     }
 
 
     const handleStep = () => {
-        if(name.value.length < 1) {
-            setName(prev => { return {...prev, error: errorTexts[1]} });
+        if (name.value.length < 1) {
+            setName(prev => { return { ...prev, error: errorTexts[1] } });
             return;
-        } else if (surname.value.length < 1){
-            setSurname(prev => { return {...prev, error: errorTexts[1]} });
+        } else if (surname.value.length < 1) {
+            setSurname(prev => { return { ...prev, error: errorTexts[1] } });
             return;
         } else if (personalNumber.value.length < 11) {
-            setPersonalNumber(prev => { return {...prev, error: errorTexts[2]} });
+            setPersonalNumber(prev => { return { ...prev, error: errorTexts[2] } });
         } else if (email.error.length > 0 || email.value.length < 1) {
             return;
-        } else if(!gender.female && !gender.male && !gender.other) {
+        } else if (!gender.female && !gender.male && !gender.other) {
             return
         } else if (!birthDate) {
             return;
         } else if (district.value.length < 1) {
-            setDistrict(prev => { return {...prev, error: errorTexts[2]} });
+            setDistrict(prev => { return { ...prev, error: errorTexts[2] } });
         } else if (!hasAgreedTerms) {
             return;
         }
@@ -101,8 +142,8 @@ const RegistrationPage = (props) => {
             email: email.value,
             address: district.value,
             isApplyTerms: hasAgreedTerms,
-            sex: gender.male? 1 : gender.female? 2 : 0
-            
+            sex: gender.male ? 1 : gender.female ? 2 : 0
+
         }
 
         props.callBack(regData);
@@ -119,22 +160,22 @@ const RegistrationPage = (props) => {
                     labeltext='სახელი'
                     value={name.value}
                     errortext={name.error}
-                    onChange={(e) => setName(prev => { return { ...prev, value: e.target.value } })} />
+                    onChange={(e) => setName(prev => { return { ...prev, value: e.target.value.trim() } })} />
                 <AppInput
                     type='text'
                     labeltext='გვარი'
                     value={surname.value}
                     errortext={surname.error}
-                    onChange={(e) => setSurname(prev => { return { ...prev, value: e.target.value } })} />
+                    onChange={(e) => setSurname(prev => { return { ...prev, value: e.target.value.trim() } })} />
                 <AppInput
-                    type='numeric'
+                    type='number-pad'
                     labeltext='ტელეფონის ნომერი'
                     value={phoneNumber.value}
                     errortext={phoneNumber.error}
                     maxLength={12}
                     onChange={(e) => handlePhoneNumber(e.target.value)} />
                 <AppInput
-                    type='numeric'
+                    type='number'
                     labeltext='პიდარი ნომერი'
                     value={personalNumber.value}
                     errortext={personalNumber.error}
@@ -146,30 +187,25 @@ const RegistrationPage = (props) => {
                     value={email.value}
                     errortext={email.error}
                     onChange={(e) => setEmail(prev => { return { ...prev, value: e.target.value } })} />
-                <div className = 'float-label' >
+                <div className='float-label' >
                     <p>სქესი</p>
                     <RoundedChekBox
                         labeltext='მამრობითი'
-                        id = 'male'
-                        checked = {gender.male}
+                        id='male'
+                        checked={gender.male}
                         onHandleCheck={() => handleGender('MALE')} />
                     <RoundedChekBox
                         labeltext='მდედრობითი'
-                        id = 'female'
-                        checked = {gender.female}
+                        id='female'
+                        checked={gender.female}
                         onHandleCheck={() => handleGender('FEMALE')} />
                     <RoundedChekBox
                         labeltext='არ მსურს გავამჟღავნო'
-                        id = 'other'
-                        checked = {gender.other}
+                        id='other'
+                        checked={gender.other}
                         onHandleCheck={() => handleGender('OTHER')} />
                 </div>
-                <AppInput
-                    type='date'
-                    placeholder='mm/dd/yyy'
-                    labeltext='დაბადების თარიღი'
-                    value={birthDate}
-                    onChange={(e) => setBirthDate(e.target.value)} />
+                <DatePicker callBack = {handleBirthDate}/>
                 <AppInput
                     type='text'
                     labeltext='საცხოვრებელი უბანი'
@@ -180,7 +216,7 @@ const RegistrationPage = (props) => {
                 <RoundedChekBox
                     labeltext='ვეთანხები წესებს და პირობებს'
                     hasLink
-                    checked = {hasAgreedTerms}
+                    checked={hasAgreedTerms}
                     onHandleCheck={() => setHasAgreedTerms(!hasAgreedTerms)} />
             </div>
             <div className='reg-bottom-cont' >

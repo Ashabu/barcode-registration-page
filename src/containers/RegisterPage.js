@@ -6,11 +6,12 @@ import RegistrationPage from '../components/registrationPage/RegistrationPage';
 
 
 
+
 const RegisterPage = () => {
 
   const [step, setStep] = useState(0);
   const [regData, setRegData] = useState(null);
-  const [displayText, setDisplayText] = useState('');
+  const [displayText, setDisplayText] = useState({value: '', hasError: false});
   const [otpErrorText, setOtpErrorText] = useState('');
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const RegisterPage = () => {
     axios.post(`https://cmapi.payunicard.ge:18011/api/Clients/AddVirtCard`, data)
       .then(res => {
         if (res.status === 200) {
-          setDisplayText('თქვენ წარმატებით გაიარეთ რეგისტრაცია, ვირტუალური ბარათის ბმულს მიიღებთ SMS – ის სახით');
+          setDisplayText({value:'თქვენ წარმატებით გაიარეთ რეგისტრაცია, ვირტუალური ბარათის ბმულს მიიღებთ SMS – ის სახით', hasError: false});
           setStep(2);
           return;
         }
@@ -40,12 +41,13 @@ const RegisterPage = () => {
           return;
         } else {
 
-          setDisplayText(e.response.data.ErrorMessage);
+          setDisplayText({value: e.response.data.ErrorMessage, hasError: true});
           setStep(2);
           return;
         };
       });
   }
+
 
 
 
@@ -60,12 +62,13 @@ const RegisterPage = () => {
               <Otp phoneNumber={regData?.phone} count={4} callBack={handleCostumerRegistration} error={otpErrorText} />
               :
               <div style={{ width: '100%', textAlign: 'center' }}>
-                <p style={{color: '#FFFFF'}}>
-                  {displayText}
-                </p>
+                <span style={{color: displayText.hasError? '#ff1212' : '#FFFFFF'}}>
+                  {displayText.value}
+                </span>
 
               </div>
         }
+        
       </Layout>
 
     </div>

@@ -61,3 +61,11 @@
             
         }
     }
+
+    @media(max-width: 400px) {
+        .app-layout {
+            .app-layout-body {
+                padding: 0 16px;
+            }
+        }
+    }

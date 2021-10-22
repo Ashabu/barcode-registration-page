@@ -22,6 +22,7 @@ const VirtualCardPage = () => {
         width: 3
       };
       
+      console.log(location);
 
     return (
         <Layout>
