@@ -8,6 +8,8 @@
             font-family: "HMpangram-Light";
             color: #cfcfcf !important;
             font-size: 12px !important;
+            display: inline-block;
+            margin-bottom: 10px;
         
     }
 
@@ -21,10 +23,11 @@
         align-items: center;
         width: 100%;
         padding: 0 10px;
+        margin-bottom: 10px;
        
 
         span {
-            font-size: 20px;
+            font-size: 18px;
             color: #FFFFFF;
         }
 
@@ -33,12 +36,15 @@
             background-color:#1A1A1A;
             color: #F6F6F6;
             border: none;
-            width: 45px;
-            height: 54px;
+            width: 52px;
             outline: none;
             font-size: 20px;
+            margin-left: 3px;
+            border-bottom: 1px solid white;
+            -webkit-appearance: none;
+            
             &.inp-1 {
-                width: 35px;
+                width: 40px;
             }
 
                 

@@ -9,7 +9,7 @@ const RoundedChekBox = (props) => {
         <div className="container" onClick={onHandleCheck}>
             <div className="round" >
                 {hasLink ?
-                    <a href="https://google.com" target="_blank">{labeltext}</a>
+                    <a href="../../assets/terms.pdf" target="_blank">{labeltext}</a>
                     :
                     <span style={{ color: 'white' }}  >{labeltext}</span>}
                 <input type="checkbox" checked={checked} id={id} onChange={onHandleCheck} />

@@ -19,14 +19,14 @@ const PhoneNumber = (props) => {
 
     useEffect(() => {
         
-        let tempNumber = `9955${phoneNumber.join("")}`;
+        let tempNumber = `5${phoneNumber.join("")}`;
         console.log(tempNumber.length)
-        if(tempNumber.length == 12) {
+        if(tempNumber.length == 9) {
             setErrorText('')
             props.callBack(tempNumber)
-        } else if(tempNumber.length > 4) {
+        } else if(tempNumber.length > 1) {
             setErrorText('არასწორი მობილურის ნომერი')
-        } else if (tempNumber.length == 4) {
+        } else if (tempNumber.length == 1) {
             setErrorText('')
         }
     }, [phoneNumber])
@@ -72,7 +72,7 @@ const PhoneNumber = (props) => {
                         key={index}
                         ref={refs[index]}
                         value={element}
-                        type='numeric'
+                        type='number-pad'
                         maxLength={index == 0? 2 : 3}
                         onChange={e => handleOnChange(e.target, index, index == 0? 2 : 3)}
                         onKeyDown={e => handleFocusInput(e, index)}

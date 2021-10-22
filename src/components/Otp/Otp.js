@@ -55,7 +55,7 @@ const Otp = (props) => {
     };
 
     const handleUserOtp = (value) => {
-        axios.post(`https://cmapi.payunicard.ge:18011/api/Otp/SendUserOtp`, { phone: value })
+        axios.post(`https://citymallapi.payunicard.ge:8061/api/Otp/SendUserOtp`, { phone: value })
             .then(res => {
                 console.log(res);
             })
@@ -84,6 +84,7 @@ const Otp = (props) => {
                     />))}
             </div>
             {error ? <p style={{color: '#ff1212', textAlign: 'center'}}>{error}</p> : null}
+                <p className = 'resend' onClick = {() => handleUserOtp(phoneNumber)} >თავიდან გამოგზავნა</p>
             <div className='otp-cont-bottom'>
                 <button className='reg-button' onClick = {() => props.callBack(otp.join(""))}>რეგისტრაცია</button>
             </div>

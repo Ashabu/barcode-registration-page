@@ -23,8 +23,8 @@ const RegistrationPage = (props) => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [personalNumber, setPersonalNumber] = useState({ value: '', error: '' });
     const [email, setEmail] = useState({ value: '', error: '' });
-    const [birthDate, setBirthDate] = useState({ value: '', error: '' });
-    const [district, setDistrict] = useState({ value: '', error: '' });
+    const [birthDate, setBirthDate] = useState();
+    const [district, setDistrict] = useState('');
     const [gender, setGender] = useState({ male: false, female: false, other: false, error: '' })
     const [hasAgreedTerms, setHasAgreedTerms] = useState({ value: false, error: '' });
 
@@ -76,18 +76,21 @@ const RegistrationPage = (props) => {
 
     const handleGender = (gender) => {
         if (gender.error !== '') {
-            setGender(prev => { return {...prev,error: ''};
+            setGender(prev => {
+                return { ...prev, error: '' };
             });
         };
         if (gender === 'MALE') {
-            setGender(prev => { return { ...prev, male: true, female: false,  other: false }
+            setGender(prev => {
+                return { ...prev, male: true, female: false, other: false }
             });
         } else if (gender === 'FEMALE') {
             setGender(prev => {
                 return { ...prev, male: false, female: true, other: false }
             });
         } else {
-            setGender(prev => { return {...prev, male: false, female: false,other: true}
+            setGender(prev => {
+                return { ...prev, male: false, female: false, other: true }
             });
         };
     };
@@ -99,6 +102,8 @@ const RegistrationPage = (props) => {
         } else if (surname.value.length < 1) {
             setName(prev => { return { ...prev, error: '' } });
             setSurname(prev => { return { ...prev, error: errorTexts[1] } });
+            return;
+        } else if (phoneNumber.length < 12) {
             return;
         } else if (personalNumber.value < 1 || personalNumber.error.length) {
             setSurname(prev => { return { ...prev, error: '' } });
@@ -112,30 +117,30 @@ const RegistrationPage = (props) => {
         } else if (!birthDate) {
             setGender(prev => { return { ...prev, error: '' } })
             return;
-        } else if (district.value = "") {
-            setDistrict(prev => { return { ...prev, error: errorTexts[2] } });
+        } else if (district == "") {
             return
         } else if (!hasAgreedTerms.value) {
-            setDistrict(prev => { return { ...prev, error: '' } });
+            
             setHasAgreedTerms(prev => { return { ...prev, error: errorTexts[5] } })
             return;
         }
 
         let regData = {
             personCode: personalNumber.value,
-            birthDate: birthDate.value,
+            birthDate: birthDate,
             firstName: name.value,
             lastname: surname.value,
-            phone: phoneNumber.value,
+            phone: phoneNumber,
             email: email.value,
-            address: district.value,
-            isApplyTerms: hasAgreedTerms,
+            address: district,
+            isApplyTerms: hasAgreedTerms.value,
             sex: gender.male ? 1 : gender.female ? 2 : 0
         }
         props.callBack(regData);
     };
 
-
+    console.log(district)
+    
 
 
     return (
@@ -154,7 +159,7 @@ const RegistrationPage = (props) => {
                     value={surname.value}
                     errortext={surname.error}
                     onChange={(e) => setSurname(prev => { return { ...prev, value: e.target.value.trim() } })} />
-                <PhoneNumber callBack = {handlePhoneNumber}/>
+                <PhoneNumber callBack={handlePhoneNumber} />
                 <AppInput
                     type='numeric'
                     labeltext='პირადი ნომერი'
@@ -185,23 +190,21 @@ const RegistrationPage = (props) => {
                         id='other'
                         checked={gender.other}
                         onHandleCheck={() => handleGender('OTHER')} />
-                        {gender.error ? <span className = 'error-text'>{gender.error}</span> : null}
+                    {gender.error ? <span className='error-text'>{gender.error}</span> : null}
                 </div>
                 <DatePicker callBack={handleBirthDate} />
                 <AppInput
                     type='text'
                     labeltext='საცხოვრებელი უბანი'
-                    errortext={district.error}
-                    value={district.value}
-                    errortext={district.error}
-                    onChange={(e) => setDistrict(prev => { return { ...prev, value: e.target.value } })} />
+                    value={district}
+                    onChange={(e) => setDistrict(e.target.value)} />
 
                 <RoundedChekBox
                     labeltext='ვეთანხები წესებს და პირობებს'
                     hasLink
                     checked={hasAgreedTerms.value}
                     onHandleCheck={() => setHasAgreedTerms({ value: !hasAgreedTerms.value, error: '' })} />
-                    {!hasAgreedTerms.error ? <span className = 'error-text'>{hasAgreedTerms.value}</span> : null}
+                {!hasAgreedTerms.error ? <span className='error-text'>{hasAgreedTerms.value}</span> : null}
             </div>
             <div className='reg-bottom-cont' >
                 <button className='reg-button' onClick={handleStep}>შემდეგ</button>

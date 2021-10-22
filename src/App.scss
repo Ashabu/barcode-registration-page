@@ -60,7 +60,47 @@
     
 }
 
+.balance {
+    text-align: center;
+    margin-bottom: 10px;
+    
+
+    span {
+        font-size: 22px;
+        color: #FFFFFF;
+    }
+}
+
 .virt-card {
-    transform: rotate(90deg);
-    width: 400px;
+    position: relative;
+    background-image: url('./assets/images/cm-card.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 344px;
+    height: 705px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+   
+
+    .barcode {
+        transform: rotate(90deg);
+        height: 100%;
+        position: absolute;
+        top: 13px;
+        right: 214px;
+    }
+}
+
+
+@media(max-width: 400px) {
+    .virt-card {
+        position: relative;
+        background-image: url('./assets/images/cm-card.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        width: 290px;
+        height: 595px;
+    }
 }
