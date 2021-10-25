@@ -49,7 +49,7 @@ const Otp = (props) => {
     };
 
     const handleOnChange = (element, index) => {
-        if (isNaN(element.value)) return;
+        if (isNaN(element.value) || element.value.length > 1) return;
         setOtp([...otp.map((v, i) => (i === index) ? element.value : v)]);
         if (element.nextSibling && element.value !== '') element.nextSibling.focus();
     };

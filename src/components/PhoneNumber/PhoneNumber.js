@@ -71,7 +71,7 @@ const PhoneNumber = (props) => {
                         key={index}
                         ref={refs[index]}
                         value={element}
-                        type='number-pad'
+                        type='numeric'
                         maxLength={index == 0? 2 : 3}
                         onChange={e => handleOnChange(e.target, index, index == 0? 2 : 3)}
                         onKeyDown={e => handleFocusInput(e, index)}

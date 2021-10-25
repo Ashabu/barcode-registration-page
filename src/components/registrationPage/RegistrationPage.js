@@ -24,7 +24,6 @@ const RegistrationPage = (props) => {
     const [personalNumber, setPersonalNumber] = useState({ value: '', error: '' });
     const [email, setEmail] = useState({ value: '', error: '' });
     const [birthDate, setBirthDate] = useState();
-    const [district, setDistrict] = useState('');
     const [gender, setGender] = useState({ male: false, female: false, other: false, error: '' })
     const [hasAgreedTerms, setHasAgreedTerms] = useState({ value: false, error: '' });
 
@@ -61,14 +60,8 @@ const RegistrationPage = (props) => {
         }
     }, [phoneNumber.value])
 
-
-
-    // const handlePhoneNumber = (value) => {
-    //     console.log(value)
-    //     setPhoneNumber(value);
-    // };
     const handlePhoneNumber = (value) => {
-        if (isNaN(value) || value.length < 1 || value.includes('.')) {
+        if (isNaN(value) || value.length < 1 || value.includes('.') || value.length > 9) {
             setPhoneNumber(prevState => {
                 return { ...prevState };
             });
@@ -139,10 +132,7 @@ const RegistrationPage = (props) => {
         } else if (!birthDate) {
             setGender(prev => { return { ...prev, error: '' } })
             return;
-        } else if (district == "") {
-            return
-        } else if (!hasAgreedTerms.value) {
-            
+        }  else if (!hasAgreedTerms.value) {
             setHasAgreedTerms(prev => { return { ...prev, error: errorTexts[5] } })
             return;
         }
@@ -154,7 +144,6 @@ const RegistrationPage = (props) => {
             lastname: surname.value,
             phone: phoneNumber.value,
             email: email.value,
-            address: district,
             isApplyTerms: hasAgreedTerms.value,
             sex: gender.male ? 1 : gender.female ? 2 : 0
         }
@@ -221,12 +210,7 @@ const RegistrationPage = (props) => {
                     {gender.error ? <span className='error-text'>{gender.error}</span> : null}
                 </div>
                 <DatePicker callBack={handleBirthDate} />
-                <AppInput
-                    type='text'
-                    
-                    labeltext='საცხოვრებელი უბანი'
-                    value={district}
-                    onChange={(e) => setDistrict(e.target.value)} />
+               
 
                 <RoundedChekBox
                     labeltext='ვეთანხები წესებს და პირობებს'

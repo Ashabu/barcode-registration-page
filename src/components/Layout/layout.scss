@@ -20,15 +20,7 @@
     
             &.up {
                 justify-content: space-between;
-                img{
-                    &:last-child {
-                        width: 110px;
-                        height: 30px;
-                        position: relative;
-                        right: 158px;
-                        top: 20px;
-                    }
-                }
+               
             }
         }
 
@@ -38,7 +30,7 @@
             img {
                 &:last-child {
                     width: 130px;
-                    margin-left: 10px;
+                    margin-top: 20px;
                 }
             }
         }

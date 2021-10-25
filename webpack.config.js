@@ -72,8 +72,8 @@ module.exports = (env, argv) => {
             historyApiFallback: {
                 disableDotRule: true
             },
-            port: 9001,
-            //host: '192.168.1.149'
+            port: 9000,
+            //host: '192.168.1.199'
         },
         devtool: !isProd && 'source-map',
         plugins: getPlugins(config, isProd, analyze),
