@@ -37,17 +37,16 @@ const RegisterPage = () => {
       })
       .catch(e => {
         if (e.response.data.ErrorCode == 111) {
-          setOtpErrorText(e.response.data.errorMessage)
+          setOtpErrorText(e.response.data.DisplayText || e.response.data.errorMessage)
           return;
         } else {
 
-          setDisplayText({ value: e.response.data.errorMessage, hasError: true });
+          setDisplayText({ value: e.response.data.DisplayText || e.response.data.errorMessage, hasError: true });
           setStep(2);
           return;
         };
       });
   }
-
 
 
 
@@ -68,14 +67,7 @@ const RegisterPage = () => {
 
               </div>
         }
-
-
-
-
-
-
       </Layout>
-
     </div>
   );
 }
