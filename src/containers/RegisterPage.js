@@ -37,11 +37,11 @@ const RegisterPage = () => {
       })
       .catch(e => {
         if (e.response.data.ErrorCode == 111) {
-          setOtpErrorText(e.response.data.ErrorMessage)
+          setOtpErrorText(e.response.data.errorMessage)
           return;
         } else {
 
-          setDisplayText({ value: e.response.data.ErrorMessage, hasError: true });
+          setDisplayText({ value: e.response.data.errorMessage, hasError: true });
           setStep(2);
           return;
         };

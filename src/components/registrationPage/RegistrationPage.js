@@ -147,7 +147,7 @@ const RegistrationPage = (props) => {
 
         let regData = {
             personCode: personalNumber.value,
-            birthDate: birthDate,
+            birthDate: birthDate.value,
             firstName: name.value,
             lastname: surname.value,
             phone: phoneNumber.value,
