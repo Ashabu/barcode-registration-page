@@ -54,8 +54,8 @@ const DateSelect = (props) => {
 
     return (
         <div className='date-select '>
-            <select name={props.name} onClick={(e) => props.callBack(e.target.value)}>
-                <option value="default" disabled >{props.name}</option>
+            <select name={props.name} value={props.startValue} onChange={(e) => props.callBack(e.target.value)}>
+                <option value='' disabled >{props.name}</option>
                 {props.data?.map((el, i) => (
                     <option key={el + 'index'} value={el}>
                         {valueTranslate(el)}

@@ -18,9 +18,9 @@ const years = [
 
 const DatePicker = (props) => {
 
-    const [day, setDay] = useState('01');
-    const [month, setMonth] = useState('01');
-    const [year, setYear] = useState('2022');
+    const [day, setDay] = useState('');
+    const [month, setMonth] = useState('');
+    const [year, setYear] = useState('');
 
     useEffect(() => {
         if (day && month && year) {
@@ -44,10 +44,11 @@ const DatePicker = (props) => {
         <div className='date-picker '>
             <span>დაბადების თარიღი</span>
             <div className='date-select-wrap'>
-                <DateSelect pickType='day' name='დღე' data={days} callBack={handleGetDay} />
-                <DateSelect pickType='month' name='თვე' data={months} callBack={handleGetMonth} />
-                <DateSelect pickType='year' name='წელი' data={years} callBack={handleGetYear} />
+                <DateSelect startValue = {day} pickType='day' name='დღე' data={days} callBack={handleGetDay} />
+                <DateSelect startValue = {month} pickType='month' name='თვე' data={months} callBack={handleGetMonth} />
+                <DateSelect startValue = {year} pickType='year' name='წელი' data={years} callBack={handleGetYear} />
             </div>
+            {props.errortext? <span className='error-text'>{props.errortext}</span> : null}
         </div>
     );
 };

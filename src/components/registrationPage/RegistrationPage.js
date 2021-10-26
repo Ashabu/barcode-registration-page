@@ -12,7 +12,8 @@ const errorTexts = [
     'პირადობის ნომერი არასწორია',
     'მობილურის ნომერი არასწორია',
     'გთხოვთ აირჩიოთ სქესი',
-    'გთხოვთ დაეთანხმოთ წესებს და პირობებს'
+    'გთხოვთ დაეთანხმოთ წესებს და პირობებს',
+    'გთხოვთ შეავსოთ დაბადების წელი'
 ]
 
 
@@ -23,7 +24,7 @@ const RegistrationPage = (props) => {
     const [phoneNumber, setPhoneNumber] = useState({ value: '5', error: '' });
     const [personalNumber, setPersonalNumber] = useState({ value: '', error: '' });
     const [email, setEmail] = useState({ value: '', error: '' });
-    const [birthDate, setBirthDate] = useState();
+    const [birthDate, setBirthDate] = useState({value: '', error: ''});
     const [gender, setGender] = useState({ male: false, female: false, other: false, error: '' })
     const [hasAgreedTerms, setHasAgreedTerms] = useState({ value: false, error: '' });
 
@@ -58,7 +59,13 @@ const RegistrationPage = (props) => {
                 return { ...prevState, error: errorTexts[3] };
             });
         }
-    }, [phoneNumber.value])
+    }, [phoneNumber.value]);
+
+    useEffect(() => {
+        if(birthDate.value && birthDate.error) {
+            
+        }
+    }, [birthDate.value])
 
     const handlePhoneNumber = (value) => {
         if (isNaN(value) || value.length < 1 || value.includes('.') || value.length > 9) {
@@ -85,8 +92,9 @@ const RegistrationPage = (props) => {
     };
 
     const handleBirthDate = (value) => {
-        console.log(value)
-        setBirthDate(value)
+        
+        setBirthDate({value: value, error: ''})
+
     }
 
     const handleGender = (gender) => {
@@ -127,13 +135,13 @@ const RegistrationPage = (props) => {
             setEmail(prev => { return { ...prev, error: errorTexts[1] } });
             return;
         } else if (!gender.female && !gender.male && !gender.other) {
-            setGender(prev => { return { ...prev, error: errorTexts[4] } })
+            setGender(prev => { return { ...prev, error: errorTexts[4] } });
             return;
-        } else if (!birthDate) {
-            setGender(prev => { return { ...prev, error: '' } })
+        } else if (!birthDate.value) {
+            setBirthDate(prev => { return { ...prev, error: errorTexts[6] } });
             return;
         }  else if (!hasAgreedTerms.value) {
-            setHasAgreedTerms(prev => { return { ...prev, error: errorTexts[5] } })
+            setHasAgreedTerms(prev => { return { ...prev, error: errorTexts[5] } });
             return;
         }
 
@@ -209,7 +217,7 @@ const RegistrationPage = (props) => {
                         onHandleCheck={() => handleGender('OTHER')} />
                     {gender.error ? <span className='error-text'>{gender.error}</span> : null}
                 </div>
-                <DatePicker callBack={handleBirthDate} />
+                <DatePicker callBack={handleBirthDate} errortext = {birthDate.error} />
                
 
                 <RoundedChekBox
@@ -217,7 +225,7 @@ const RegistrationPage = (props) => {
                     hasLink
                     checked={hasAgreedTerms.value}
                     onHandleCheck={() => setHasAgreedTerms({ value: !hasAgreedTerms.value, error: '' })} />
-                {!hasAgreedTerms.error ? <span className='error-text'>{hasAgreedTerms.error}</span> : null}
+                {hasAgreedTerms.error ? <span className='error-text'>{hasAgreedTerms.error}</span> : null}
             </div>
             <div className='reg-bottom-cont' >
                 <button className='reg-button' onClick={handleStep}>შემდეგი</button>
